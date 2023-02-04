@@ -11,6 +11,8 @@ This project was only tested on **Ubuntu 20.04**, so it is **highly recommended*
 
 This script is not a definitive way to install Cairo 1.0, as there is currently no documentation source I tried to save people a few steps in the way that worked for me. NO need to run with sudo. 
 
+Note that this does not remove any previous Cairo versions, but if you have one currently installed, it may cause conflicts.
+
 ## How to use
 1. Clone the repo
 ```
