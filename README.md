@@ -36,11 +36,8 @@ https://user-images.githubusercontent.com/58611754/216782590-761dc16f-dafe-4813-
 
 ## Special Thanks ✨
 
-- [dpinoness](https://github.com/dpinones): for showing me how the installation process was, I simply based myself on those steps to automate this, the credit belongs to him.
+- [dpinoness](https://github.com/dpinones): for showing me how the installation process was, I simply based myself on those steps to automate this, the credit belongs to him. Also the base project is from their [Exploring Cairo 1.0](https://github.com/dpinones/exploring-of-cairo-1) repository 🤣 (next step if you want to learn more about syntax).
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
 <table>
   <tbody>
     <tr>
