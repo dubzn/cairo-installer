@@ -12,7 +12,6 @@ NC='\033[0m'              # Text Reset
 
 SUPPORTED_VERSIONS=("1.0.0-alpha-2")
 SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
-CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
 CAIRO_PATH="~/cairo/bin"
 
 CAIRO_ENV="export PATH=\"$CAIRO_PATH:\$PATH\""
@@ -26,6 +25,7 @@ declare -A VERSIONS_URL
 VERSIONS_URL=( ["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2 )
 # VERSIONS_URL=( ["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2 ["1.0.0-alpha-3"]=$CAIRO100_ALPHA_3 ... )
 
+CAIRO_TAR_PATH=""
 CAIRO_URL=""
 
 set_cairo_version() {
@@ -39,6 +39,7 @@ set_cairo_version() {
     if [[ $supported_versions_found == 1 ]]; then
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
+        CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         return 1
     else
         printf "${BRed}[ERROR] The version $1 is not in the supported versions: ${BWhite}$SUPPORTED_VERSIONS_STR. ${NC}\\n"
