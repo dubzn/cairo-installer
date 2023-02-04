@@ -30,6 +30,8 @@ The supported versions are the following:
 ```
 source ./installer.sh 1.0.0-alpha-2
 ```
+4. If everything went well, you should see something like this:
+![image](https://user-images.githubusercontent.com/58611754/216786030-4faf9bd7-b792-4bdc-a34f-12f91e8439c6.png)
 
 ## Video (Speed x5)
 https://user-images.githubusercontent.com/58611754/216782590-761dc16f-dafe-4813-8789-f5907bba5ec9.mp4
