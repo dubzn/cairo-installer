@@ -10,8 +10,8 @@ BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 NC='\033[0m'              # Text Reset
 
-SUPPORTED_VERSIONS=("1.0.0-alpha-2" "1.0.0-alpha-3")
-SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2, 1.0.0-alpha-3 ]"
+SUPPORTED_VERSIONS=("1.0.0-alpha-2")
+SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2]"
 CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
 CAIRO_PATH="~/cairo/bin"
 
