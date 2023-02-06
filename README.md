@@ -24,19 +24,26 @@ cd cairo-installer
 ```
 3. Run installer.sh with cairo version 
 
-The supported versions are the following:
+3.1 Install the latest version supported by the installer
+```
+source installer.sh
+```
 
+3.2 Install a specific version
+The supported versions are the following:
 | [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
 | -------------  | ------------- |
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
+
+You can install a specific version (from the Parameter column of the table) and install it:
 ```
 source ./installer.sh 1.0.0-alpha-2
 ```
 4. If everything went well, you should see something like this:
 ![image](https://user-images.githubusercontent.com/58611754/216786030-4faf9bd7-b792-4bdc-a34f-12f91e8439c6.png)
 
-## Video (Speed x5)
-https://user-images.githubusercontent.com/58611754/216782590-761dc16f-dafe-4813-8789-f5907bba5ec9.mp4
+## Video
+https://user-images.githubusercontent.com/58611754/217096040-404e7f74-9d34-4a98-8b51-cb422157c271.mp4
 
 ## Special Thanks ✨
 
