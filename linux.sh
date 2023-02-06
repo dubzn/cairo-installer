@@ -99,13 +99,6 @@ run_cairo_version() {
 }
 
 main() {
-    echo $CAIRO_VERSION
-    echo $CAIRO_TAR_PATH
-    echo $CAIRO_URL
-    echo $CAIRO_ENV
-    echo $CARGO_ENV
-    echo $BASH_FILE
-
     install_curl
     install_cargo
     download_cairo
