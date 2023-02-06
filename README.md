@@ -30,12 +30,10 @@ source installer.sh
 ```
 
 3.2 Install a specific version
-The supported versions are the following:
 | [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
 | -------------  | ------------- |
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
 
-You can install a specific version (from the Parameter column of the table) and install it:
 ```
 source ./installer.sh 1.0.0-alpha-2
 ```
