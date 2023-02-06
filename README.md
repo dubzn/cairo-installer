@@ -24,12 +24,12 @@ cd cairo-installer
 ```
 3. Run installer.sh with cairo version 
 
-3.1 Install the latest version supported by the installer
+3.a Install the latest version by simply running
 ```
 source installer.sh
 ```
 
-3.2 Install a specific version
+3.b Optionally, you can choose one of the available versions in the following table:
 | [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
 | -------------  | ------------- |
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
