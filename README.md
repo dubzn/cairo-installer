@@ -38,7 +38,7 @@ source installer.sh
 source ./installer.sh 1.0.0-alpha-2
 ```
 4. If everything went well, you should see something like this:
-![image](https://user-images.githubusercontent.com/58611754/216786030-4faf9bd7-b792-4bdc-a34f-12f91e8439c6.png)
+![image](https://user-images.githubusercontent.com/58611754/217097377-8883dc47-bc4a-431b-b821-b952cfcd8e8d.png)
 
 ## Video
 https://user-images.githubusercontent.com/58611754/217096040-404e7f74-9d34-4a98-8b51-cb422157c271.mp4
