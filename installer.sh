@@ -1,36 +1,6 @@
 #!/bin/sh
 
-BBlack='\033[1;30m'       # Black
-BRed='\033[1;31m'         # Red
-BGreen='\033[1;32m'       # Green
-BYellow='\033[1;33m'      # Yellow
-BBlue='\033[1;34m'        # Blue
-BPurple='\033[1;35m'      # Purple
-BCyan='\033[1;36m'        # Cyan
-BWhite='\033[1;37m'       # White
-NC='\033[0m'              # Text Reset
-
-LATEST_VERSION="1.0.0-alpha-2"
-SUPPORTED_VERSIONS=("1.0.0-alpha-2")
-SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
-CAIRO_PATH="~/cairo/bin"
-
-CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
-CARGO_ENV="PATH=\"\$PATH:$HOME/.cargo/bin\""
-
-# Cairo versions
-CAIRO100_ALPHA_2='https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz'
-
-# Map with relations between version and URL
-declare -A VERSIONS_URL
-VERSIONS_URL=( ["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2 )
-
-CAIRO_TAR_PATH=""
-CAIRO_URL=""
-CAIRO_VERSION=""
-
-BASH_FILE=""
-OS=""
+source variables.sh
 
 set_cairo_version() {
     # User dont send a version parameter, so take latest supported.
@@ -38,6 +8,8 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        CAIRO_PATH="~/cairo/$CAIRO_VERSION/bin"
+        CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
         return 1
     fi
 
@@ -53,6 +25,8 @@ set_cairo_version() {
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        CAIRO_PATH="~/cairo/$CAIRO_VERSION/bin"
+        CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
         return 1
     else
         return 0
@@ -118,7 +92,7 @@ main() {
     # if [[ $OS == 'Mac' ]]; then
     #     source mac.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     if [[ $OS == 'Linux' ]]; then
-        source linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
+        source os/linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     fi
 
 }

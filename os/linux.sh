@@ -1,11 +1,6 @@
 #!/bin/sh
 
-BRed='\033[1;31m'         # Red
-BGreen='\033[1;32m'       # Green
-BPurple='\033[1;35m'      # Purple
-BCyan='\033[1;36m'        # Cyan
-BWhite='\033[1;37m'       # White
-NC='\033[0m'              # Text Reset
+source variables.sh
 
 CAIRO_VERSION=$1
 CAIRO_TAR_PATH=$2
@@ -45,6 +40,13 @@ install_cargo() {
     fi    
 }
 
+create_cairo_folder() {
+    if [  ! -d "$CAIRO_FOLDER" ]; then
+        printf "${BPurple}[!] Cairo folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
+        mkdir "$CAIRO_FOLDER"
+    fi
+}
+
 download_cairo() {
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
 
@@ -58,7 +60,8 @@ download_cairo() {
     fi
 
     printf "${BCyan}[!] Decompressing.. ${NC}\\n"
-    tar -xzvf "$CAIRO_TAR_PATH" -C "$HOME" > temp
+    tar -xzvf "$CAIRO_TAR_PATH" -C "$CAIRO_FOLDER" > temp
+    mv "$CAIRO_FOLDER/cairo" "$CAIRO_FOLDER/$CAIRO_VERSION" 
 }
 
 check_envs() {
@@ -71,7 +74,7 @@ check_envs() {
         echo $CARGO_ENV >> $BASH_FILE
     fi
 
-    printf "${BCyan}[!] Check Cairo env ($CAIRO_PATH)..${NC}\\n"
+    printf "${BCyan}[!] Check Cairo env..${NC}\\n"
     if grep -q "$CAIRO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CAIRO_ENV is already setted in $BASH_FILE.${NC}\\n"
     else
@@ -90,7 +93,7 @@ clean() {
 
 run_cairo_version() {
     if ! command --version "cairo-compile" > /dev/null 2>&1; then
-        printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
+        printf "${BGreen}[!] Cairo (v$CAIRO_VERSION) installation was successful!${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         cairo-run -p ./src/hello_world.cairo         
     else 
@@ -101,6 +104,7 @@ run_cairo_version() {
 main() {
     install_curl
     install_cargo
+    create_cairo_folder
     download_cairo
     check_envs
     clean
