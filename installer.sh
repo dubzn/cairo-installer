@@ -40,6 +40,9 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        
+        printf "[set_cairo_version] version=$CAIRO_VERSION, url: $CAIRO_URL, tar_path=$CAIRO_TAR_PATH \\n"
+        printf "[set_cairo_version] returns 1 \\n"
         return 1
     fi
 
@@ -103,6 +106,7 @@ main() {
 
     set_cairo_version $1
     version_is_supported=$?
+    printf "[main] version_is_supported=$version_is_supported \\n"
     set_bash_file
     terminal_supported=$?
     set_os
