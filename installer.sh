@@ -40,10 +40,10 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        
+        echo "VERSION_IS_SUPPORTED=1" >> temp.txt
         printf "[set_cairo_version] version=$CAIRO_VERSION, url: $CAIRO_URL, tar_path=$CAIRO_TAR_PATH \\n"
         printf "[set_cairo_version] returns 1 \\n"
-        return 1
+        return 
     fi
 
     # User send a version parameter, so check if is supported.
@@ -59,10 +59,12 @@ set_cairo_version() {
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         printf "[set_cairo_version] returns 1 \\n"
-        return 1
+        echo "VERSION_IS_SUPPORTED=1" >> temp.txt
+        return 
     else
         printf "[set_cairo_version] returns 0 \\n"
-        return 0
+        echo "VERSION_IS_SUPPORTED=0" >> temp.txt
+        return 
     fi
 }
 
