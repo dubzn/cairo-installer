@@ -7,10 +7,10 @@ on:
 
 jobs:
   build-20_04:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Ejecución de script en Bash en Ubuntu 20.04
       run: |
-        source installer.sh
+        chmod +x installer.sh && source installer.sh
