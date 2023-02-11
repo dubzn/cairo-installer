@@ -32,7 +32,7 @@ CAIRO_VERSION=""
 BASH_FILE=""
 OS=""
 
-function set_cairo_version {
+set_cairo_version() {
     printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
     if [[ -z $1 ]]; then
