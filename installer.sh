@@ -40,7 +40,7 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        echo "VERSION_IS_SUPPORTED=1" >> temp.txt
+        echo "VERSION_SUPPORTED=1" >> supports.txt
         printf "[set_cairo_version] version=$CAIRO_VERSION, url: $CAIRO_URL, tar_path=$CAIRO_TAR_PATH \\n"
         printf "[set_cairo_version] returns 1 \\n"
         return 
@@ -59,11 +59,11 @@ set_cairo_version() {
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         printf "[set_cairo_version] returns 1 \\n"
-        echo "VERSION_IS_SUPPORTED=1" >> temp.txt
+        echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     else
         printf "[set_cairo_version] returns 0 \\n"
-        echo "VERSION_IS_SUPPORTED=0" >> temp.txt
+        echo "VERSION_SUPPORTED=0" >> supports.txt
         return 
     fi
 }
@@ -75,9 +75,11 @@ set_bash_file() {
     elif [ "$SHELL" == "/bin/zsh" ]; then
         BASH_FILE="$HOME/.zshrc"
     else
-        return 0
+        echo "TERMINAL_SUPPORTED=0" >> supports.txt
+        return 
     fi
-    return 1
+    echo "TERMINAL_SUPPORTED=1" >> supports.txt
+    return 
 }
 
 set_os() {
@@ -87,13 +89,14 @@ set_os() {
     # elif [ "$(uname -s)" == "Darwin" ]; then
     #     OS="Mac"
     else
-        return 0
+        echo "OS_SUPPORTED=0" >> supports.txt
+        return 
     fi
-    return 1
+    echo "TERMINAL_SUPPORTED=1" >> supports.txt
+    return
 }
 
 main() {
-    # START OF SCRIPT
     printf "${BCyan} 
     ############################################################################
     | _____         _               _         *    _          _  _            +|
@@ -107,20 +110,18 @@ main() {
     ${NC}\\n"
 
     set_cairo_version $1
-    if ! grep -q "VERSION_IS_SUPPORTED=0" temp.txt; then
+    if grep -q "VERSION_SUPPORTED=0" supports.txt; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
     fi
+    
     set_bash_file
-    terminal_supported=$?
-    set_os
-    os_is_supported=$?
-
-    if [[ $terminal_supported == 0 ]]; then
-        printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
+    if grep -q "TERMINAL_SUPPORTED=0" supports.txt; then
+         printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
     fi
-
-    if [[ $os_is_supported == 0 ]]; then
-        printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
+    
+    set_os
+    if grep -q "OS_SUPPORTED=0" supports.txt; then
+         printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
 
     printf "${BCyan}Installing Cairo ($CAIRO_VERSION) for $OS ${NC}\\n"
