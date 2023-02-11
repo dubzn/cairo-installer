@@ -16,6 +16,7 @@ jobs:
     - name: Ejecución de script en Bash en Ubuntu 20.04
       run: |
         chmod +x installer.sh && source installer.sh 
+        source ~/.bashrc
     - name: Check installed version
       run: |
         cairo-compile --version
