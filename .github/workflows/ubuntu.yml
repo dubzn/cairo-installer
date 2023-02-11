@@ -13,4 +13,4 @@ jobs:
       uses: actions/checkout@v2
     - name: Ejecución de script en Bash en Ubuntu 20.04
       run: |
-        ls -al
+        source installer.sh
