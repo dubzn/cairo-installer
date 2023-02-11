@@ -33,8 +33,10 @@ BASH_FILE=""
 OS=""
 
 set_cairo_version() {
+    printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
     if [[ -z $1 ]]; then
+        printf "[set_cairo_version] User dont send a version parameter, so take latest supported\\n"
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
@@ -53,13 +55,16 @@ set_cairo_version() {
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        printf "[set_cairo_version] returns 1 \\n"
         return 1
     else
+        printf "[set_cairo_version] returns 0 \\n"
         return 0
     fi
 }
 
 set_bash_file() {
+    printf "[set_bash_file] init\\n"
     if [ "$SHELL" == "/bin/bash" ]; then
         BASH_FILE="$HOME/.bashrc"
     elif [ "$SHELL" == "/bin/zsh" ]; then
@@ -71,6 +76,7 @@ set_bash_file() {
 }
 
 set_os() {
+    printf "[set_os] init\\n"
     if [ "$(uname -s)" == "Linux" ]; then
         OS="Linux"
     # elif [ "$(uname -s)" == "Darwin" ]; then
