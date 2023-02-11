@@ -104,7 +104,8 @@ main() {
     ############################################################################
     ${NC}\\n"
 
-    version_is_supported=$(set_cairo_version)
+    set_cairo_version $1
+    version_is_supported=$?
     printf "[main] version_is_supported=$version_is_supported \\n"
     set_bash_file
     terminal_supported=$?
