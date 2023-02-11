@@ -103,6 +103,7 @@ main() {
     install_cargo
     download_cairo
     check_envs
+    tail $HOME/.bashrc
     clean
     run_cairo_version
 }
