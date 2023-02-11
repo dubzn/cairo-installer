@@ -89,7 +89,7 @@ clean() {
 }
 
 run_cairo_version() {
-    if ! command --version "cairo-compile" > /dev/null 2>&1; then
+    if ! command -V "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         cairo-run -p ./src/hello_world.cairo         
