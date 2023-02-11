@@ -105,6 +105,7 @@ main() {
     ${NC}\\n"
 
     set_cairo_version $1
+    printf "[main] bf version_is_supported=$version_is_supported \\n"
     version_is_supported=$?
     printf "[main] version_is_supported=$version_is_supported \\n"
     set_bash_file
