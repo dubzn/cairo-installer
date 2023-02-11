@@ -32,7 +32,7 @@ CAIRO_VERSION=""
 BASH_FILE=""
 OS=""
 
-set_cairo_version() {
+function set_cairo_version {
     printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
     if [[ -z $1 ]]; then
@@ -104,9 +104,7 @@ main() {
     ############################################################################
     ${NC}\\n"
 
-    set_cairo_version $1
-    printf "[main] bf version_is_supported=$version_is_supported \\n"
-    version_is_supported=$?
+    version_is_supported=$(set_cairo_version $1)
     printf "[main] version_is_supported=$version_is_supported \\n"
     set_bash_file
     terminal_supported=$?
