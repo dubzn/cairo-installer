@@ -13,7 +13,7 @@ NC='\033[0m'              # Text Reset
 LATEST_VERSION="1.0.0-alpha-2"
 SUPPORTED_VERSIONS=("1.0.0-alpha-2")
 SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
-CAIRO_PATH="~/cairo/bin"
+CAIRO_PATH="$HOME/cairo/bin"
 
 CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
 CARGO_ENV="PATH=\"\$PATH:$HOME/.cargo/bin\""
