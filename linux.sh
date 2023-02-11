@@ -69,6 +69,7 @@ check_envs() {
         printf "${BPurple}[!] $CARGO_ENV is not setted, trying to set into $BASH_FILE..${NC}\\n"
         echo >> $BASH_FILE
         echo $CARGO_ENV >> $BASH_FILE
+        export $CAIRO_ENV
     fi
 
     printf "${BCyan}[!] Check Cairo env ($CAIRO_PATH)..${NC}\\n"
@@ -78,6 +79,7 @@ check_envs() {
         printf "${BPurple}[!] $CAIRO_ENV is not setted, trying to set into $BASH_FILE..${NC}\\n"
         echo >> $BASH_FILE
         echo $CAIRO_ENV >> $BASH_FILE
+        export $CAIRO_ENV
     fi
     source $BASH_FILE
 }
