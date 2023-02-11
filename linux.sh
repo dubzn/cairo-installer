@@ -92,7 +92,7 @@ run_cairo_version() {
     if ! command -V "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        source $BASH_FILE
+        $HOME/cairo/bin/cairo-compile --version
         echo $PATH
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
