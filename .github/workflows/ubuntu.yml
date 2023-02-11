@@ -13,4 +13,3 @@ jobs:
     - name: Ejecución de script en Bash en Ubuntu 20.04
       run: |
         ls
-        chmod +x ../installer.sh && source ../installer.sh
