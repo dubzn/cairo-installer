@@ -1,8 +1,10 @@
 name: Run latest instalation on Ubuntu
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
   push:
-    branches:
+   branches:
       - master
 
 jobs:
