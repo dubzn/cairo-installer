@@ -11,18 +11,6 @@ jobs:
 
     steps:
     - name: Ejecución de script en Bash en Ubuntu 20.04
-      run: chmod +x ./installer.sh && source ./installer.sh
-
-  build-20_10:
-    runs-on: ubuntu-20.10
-
-    steps:
-    - name: Ejecución de script en Bash en Ubuntu 20.10
-      run: chmod +x ./installer.sh && source ./installer.sh
-
-  build-21_04:
-    runs-on: ubuntu-21.04
-
-    steps:
-    - name: Ejecución de script en Bash en Ubuntu 21.04
-      run: chmod +x ./installer.sh && source ./installer.sh
+      run: |
+        ls
+        chmod +x ../installer.sh && source ../installer.sh
