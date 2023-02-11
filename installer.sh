@@ -105,12 +105,12 @@ main() {
     ${NC}\\n"
 
     set_cairo_version $1
-    version_is_supported=$?
+    #version_is_supported=$?
     printf "[main] version_is_supported=$version_is_supported \\n"
-    set_bash_file
-    terminal_supported=$?
-    set_os
-    os_is_supported=$?
+    #set_bash_file
+    #terminal_supported=$?
+    #set_os
+    #os_is_supported=$?
 
     if [[ $supported_versions_found == 0 ]]; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
