@@ -94,9 +94,8 @@ run_cairo_version() {
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         $HOME/cairo/bin/cairo-compile --version
-        tail $HOME/.bashrc
-        export $CAIRO_ENV1
-        echo $PATH
+        export PATH="$CAIRO_ENV1"
+        echo "PATH: $PATH"
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
     fi
