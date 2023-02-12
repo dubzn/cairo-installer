@@ -95,7 +95,7 @@ run_cairo_version() {
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         $HOME/cairo/bin/cairo-compile --version
         echo "PATH: $PATH"
-        export PATH="$CAIRO_ENV1"
+        export PATH=$HOME/cairo/bin:$PATH
         echo "PATH: $PATH"
         cairo-compile --version
     else 
