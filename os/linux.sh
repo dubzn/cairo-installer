@@ -99,6 +99,7 @@ run_cairo_version() {
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         # Hardcoded for now should be updated with multi-version
         export "PATH=$CAIRO_ENV_TEMP:\$PATH"
+        echo "PATH: $PATH"
         cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
