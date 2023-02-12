@@ -1,4 +1,4 @@
-name: Run script on Ubuntu
+name: Run installer on Ubuntu
 
 on:
   pull_request:
@@ -16,6 +16,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Ejecución de script en Bash en Ubuntu 20.04
+    - name: Run installer on Ubuntu
       run: |
+        lsb_release -a
         chmod +x installer.sh && source installer.sh 
