@@ -1,4 +1,4 @@
-name: Run installer on Ubuntu
+name: Run installer
 
 on:
   pull_request:
