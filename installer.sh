@@ -51,8 +51,8 @@ set_bash_file() {
 set_os() {
     if [ "$(uname -s)" == "Linux" ]; then
         OS="Linux"
-    # elif [ "$(uname -s)" == "Darwin" ]; then
-    #     OS="Mac"
+    elif [ "$(uname -s)" == "Darwin" ]; then
+        OS="Mac"
     else
         echo "OS_SUPPORTED=0" >> supports.txt
         return 
@@ -103,8 +103,8 @@ main() {
     fi
 
     printf "${BCyan}Installing Cairo ($CAIRO_VERSION) for $OS ${NC}\\n"
-    # if [[ $OS == 'Mac' ]]; then
-    #     source mac.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
+    if [ "$OS" == "Mac" ]; then
+        source mac.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     if [ "$OS" == "Linux" ]; then
         source os/linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     fi

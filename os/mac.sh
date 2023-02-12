@@ -7,6 +7,7 @@ CAIRO_TAR_PATH=$2
 CAIRO_URL=$3
 
 CAIRO_ENV="export $4"
+CAIRO_ENV_TEMP=$4
 CARGO_ENV="export $5"
 
 BASH_FILE=$6
@@ -14,9 +15,7 @@ BASH_FILE=$6
 install_curl() {
     if ! command -v "curl" > /dev/null 2>&1; then
         printf "${BPurple}[!] Curl was not found, installing..${NC}\\n"
-        if [ "$(uname)" == "Darwin" ]; then
-            brew install curl
-        fi
+        sudo apt install curl -y
     else
         printf "${BGreen}[OK] Curl was found, skipping install..${NC}\\n"
     fi
@@ -44,18 +43,12 @@ install_cargo() {
 
 download_cairo() {
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
-
-    curl -LJ "$CAIRO_URL" -o "$CAIRO_TAR_PATH"
-
-    if test -f "$CAIRO_TAR_PATH"; then
-        printf "${BGreen}[!] Download success file path $CAIRO_TAR_PATH.${NC}\\n"
-    else
-        printf "${BRed}[!] An error occurs trying to download Cairo from Github  :(${NC}\\n"
-        exit 1
-    fi
-
-    printf "${BCyan}[!] Decompressing.. ${NC}\\n"
-    tar -xzvf "$CAIRO_TAR_PATH" -C "$HOME" > temp
+    cd $HOME
+    git clone https://github.com/starkware-libs/cairo.git
+    cd cairo
+    cargo build --all --release
+    cd target/release  
+    pwd
 }
 
 check_envs() {
@@ -79,17 +72,13 @@ check_envs() {
     source $BASH_FILE
 }
 
-clean() {
-    printf "${BCyan}[!] Cleaning up..${NC}\\n"
-    rm ./temp
-    rm $CAIRO_TAR_PATH
-}
-
 run_cairo_version() {
-    if ! command --version "cairo-compile" > /dev/null 2>&1; then
+    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
+    if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        cargo run --bin cairo-run -- -p ./example/hello_world.cairo         
+        export PATH=$HOME/cairo/$CAIRO_VERSION/bin:$PATH
+        cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
     fi
@@ -100,7 +89,6 @@ main() {
     install_cargo
     download_cairo
     check_envs
-    clean
     run_cairo_version
 }
 
