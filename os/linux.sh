@@ -12,6 +12,8 @@ CARGO_ENV="export $5"
 
 BASH_FILE=$6
 
+DEBUG=0 # change to 1 for extra messages
+
 install_curl() {
     if ! command -v "curl" > /dev/null 2>&1; then
         printf "${BPurple}[!] Curl was not found, installing..${NC}\\n"
@@ -98,10 +100,7 @@ run_cairo_version() {
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        # Hardcoded for now should be updated with multi-version
-        echo "PATH: $PATH"
         export PATH=$HOME/cairo/$CAIRO_VERSION/bin:$PATH
-        echo "PATH: $PATH"
         cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
@@ -109,13 +108,14 @@ run_cairo_version() {
 }
 
 main() {
-    printf "[main linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
-    printf "[main linux] CAIRO_TAR_PATH=$CAIRO_TAR_PATH ${NC}\\n"
-    printf "[main linux] CAIRO_URL=$CAIRO_URL ${NC}\\n"
-    printf "[main linux] CAIRO_ENV=$CAIRO_ENV ${NC}\\n"
-    printf "[main linux] CARGO_ENV=$CARGO_ENV ${NC}\\n"
-    printf "[main linux] BASH_FILE=$BASH_FILE ${NC}\\n"
-
+    if [ "$DEBUG" -eq 1 ]; then
+        printf "[linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
+        printf "[linux] CAIRO_TAR_PATH=$CAIRO_TAR_PATH ${NC}\\n"
+        printf "[linux] CAIRO_URL=$CAIRO_URL ${NC}\\n"
+        printf "[linux] CAIRO_ENV=$CAIRO_ENV ${NC}\\n"
+        printf "[linux] CARGO_ENV=$CARGO_ENV ${NC}\\n"
+        printf "[linux] BASH_FILE=$BASH_FILE ${NC}\\n"
+    fi
     install_curl
     install_cargo
     create_cairo_folder
