@@ -14,6 +14,7 @@ This script is not a definitive way to install Cairo 1.0, as there is currently 
 Note that this does not remove any previous Cairo versions, but if you have one currently installed, it may cause conflicts.
 
 ## How to use
+### Install
 1. Clone the repo
 ```
 git clone https://github.com/sdgalvan/cairo-installer.git
@@ -35,10 +36,30 @@ source installer.sh
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
 
 ```
-source ./installer.sh 1.0.0-alpha-2
+source installer.sh 1.0.0-alpha-2
 ```
 4. If everything went well, you should see something like this:
 ![image](https://user-images.githubusercontent.com/58611754/217097377-8883dc47-bc4a-431b-b821-b952cfcd8e8d.png)
+
+### Change version
+1. Clone the repo
+```
+git clone https://github.com/sdgalvan/cairo-installer.git
+```
+2. Go to the version-manager.sh folder
+```
+cd cairo-installer
+```
+3. Run version-manager.sh with cairo version 
+| [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
+| -------------  | ------------- |
+| [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
+
+```
+source version-manager.sh 1.0.0-alpha-2
+```
+4. If everything went well, you should see something like this:
+![image](https://user-images.githubusercontent.com/58611754/218343764-ddf408be-0235-400a-b854-7a79e7082c7f.png)
 
 ## Video
 https://user-images.githubusercontent.com/58611754/217096040-404e7f74-9d34-4a98-8b51-cb422157c271.mp4
