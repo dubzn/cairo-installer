@@ -1,8 +1,10 @@
 name: Run latest instalation on Ubuntu
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
   push:
-    branches:
+   branches:
       - master
 
 jobs:
@@ -13,6 +15,4 @@ jobs:
       uses: actions/checkout@v2
     - name: Ejecución de script en Bash en Ubuntu 20.04
       run: |
-        echo "$(uname -s)"
         chmod +x installer.sh && source installer.sh 
-        echo $?
