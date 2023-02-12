@@ -1,64 +1,32 @@
 #!/bin/sh
 
-BBlack='\033[1;30m'       # Black
-BRed='\033[1;31m'         # Red
-BGreen='\033[1;32m'       # Green
-BYellow='\033[1;33m'      # Yellow
-BBlue='\033[1;34m'        # Blue
-BPurple='\033[1;35m'      # Purple
-BCyan='\033[1;36m'        # Cyan
-BWhite='\033[1;37m'       # White
-NC='\033[0m'              # Text Reset
-
-LATEST_VERSION="1.0.0-alpha-2"
-SUPPORTED_VERSIONS=("1.0.0-alpha-2")
-SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
-CAIRO_PATH="$HOME/cairo/bin"
-
-CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
-CARGO_ENV="PATH=\"\$PATH:$HOME/.cargo/bin\""
-
-# Cairo versions
-CAIRO100_ALPHA_2='https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz'
-
-# Map with relations between version and URL
-declare -A VERSIONS_URL
-VERSIONS_URL=( ["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2 )
-
-CAIRO_TAR_PATH=""
-CAIRO_URL=""
-CAIRO_VERSION=""
-
-BASH_FILE=""
-OS=""
+source variables.sh
+DEBUG=0 # change to 1 for extra messages
 
 set_cairo_version() {
-    printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
-    if [[ -z $1 ]]; then
-        printf "[set_cairo_version] User dont send a version parameter, so take latest supported\\n"
+    if [ -z "$1" ]; then
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
-        printf "[set_cairo_version] version=$CAIRO_VERSION, url: $CAIRO_URL, tar_path=$CAIRO_TAR_PATH \\n"
-        printf "[set_cairo_version] returns 1 \\n"
         return 
     fi
 
     # User send a version parameter, so check if is supported.
     supported_versions_found=0
     for i in "${SUPPORTED_VERSIONS[@]}"; do
-        if [[ $i == $1 ]]; then
+        if [ "$i" == "$1" ]; then
             supported_versions_found=1
             break
         fi
     done
-    if [[ $supported_versions_found == 1 ]]; then
+    if [ "$supported_versions_found" == 1 ]; then
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        printf "[set_cairo_version] returns 1 \\n"
+        CAIRO_ENV="$HOME/cairo/$CAIRO_VERSION/bin:\$PATH"
         echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     else
@@ -69,7 +37,6 @@ set_cairo_version() {
 }
 
 set_bash_file() {
-    printf "[set_bash_file] init\\n"
     if [ "$SHELL" == "/bin/bash" ]; then
         BASH_FILE="$HOME/.bashrc"
     elif [ "$SHELL" == "/bin/zsh" ]; then
@@ -79,11 +46,9 @@ set_bash_file() {
         return 
     fi
     echo "TERMINAL_SUPPORTED=1" >> supports.txt
-    return 
 }
 
 set_os() {
-    printf "[set_os] init\\n"
     if [ "$(uname -s)" == "Linux" ]; then
         OS="Linux"
     # elif [ "$(uname -s)" == "Darwin" ]; then
@@ -92,7 +57,7 @@ set_os() {
         echo "OS_SUPPORTED=0" >> supports.txt
         return 
     fi
-    echo "TERMINAL_SUPPORTED=1" >> supports.txt
+    echo "OS_SUPPORTED=1" >> supports.txt
     return
 }
 
@@ -110,16 +75,29 @@ main() {
     ${NC}\\n"
 
     set_cairo_version $1
+    if [ "$DEBUG" -eq 1 ]; then
+        printf "[main] CAIRO_VERSION: $CAIRO_VERSION ${NC}\\n"
+        printf "[main] CAIRO_URL: $CAIRO_URL ${NC}\\n"
+        printf "[main] CAIRO_TAR_PATH: $CAIRO_TAR_PATH ${NC}\\n"
+        printf "[main] CAIRO_ENV: $CAIRO_ENV ${NC}\\n"
+        printf "[main] CARGO_ENV: $CARGO_ENV ${NC}\\n"
+    fi
     if grep -q "VERSION_SUPPORTED=0" supports.txt; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
     fi
     
     set_bash_file
+    if [ "$DEBUG" -eq 1 ]; then
+        printf "[main] BASH_FILE: $BASH_FILE ${NC}\\n"
+    fi
     if grep -q "TERMINAL_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
     fi
     
     set_os
+    if [ "$DEBUG" -eq 1 ]; then
+        printf "[main] OS: $OS ${NC}\\n"
+    fi
     if grep -q "OS_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
@@ -127,10 +105,9 @@ main() {
     printf "${BCyan}Installing Cairo ($CAIRO_VERSION) for $OS ${NC}\\n"
     # if [[ $OS == 'Mac' ]]; then
     #     source mac.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
-    if [[ $OS == 'Linux' ]]; then
-        source linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
+    if [ "$OS" == "Linux" ]; then
+        source os/linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     fi
-
 }
 
 main $1
