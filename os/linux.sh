@@ -105,6 +105,7 @@ run_cairo_version() {
 }
 
 main() {
+    printf "[main linux] $1, $2, $3, $4, $5, $6, $7, $8 ... \\n"
     printf "[main linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
     printf "[main linux] CAIRO_TAR_PATH=$CAIRO_TAR_PATH ${NC}\\n"
     printf "[main linux] CAIRO_URL=$CAIRO_URL ${NC}\\n"
