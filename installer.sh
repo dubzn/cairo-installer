@@ -2,6 +2,9 @@
 
 source variables.sh
 
+
+BASH_FILE=""
+
 set_cairo_version() {
     printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
@@ -45,7 +48,6 @@ set_bash_file() {
         return 
     fi
     echo "TERMINAL_SUPPORTED=1" >> supports.txt
-    return 
 }
 
 set_os() {
@@ -58,7 +60,7 @@ set_os() {
         echo "OS_SUPPORTED=0" >> supports.txt
         return 
     fi
-    echo "TERMINAL_SUPPORTED=1" >> supports.txt
+    echo "OS_SUPPORTED=1" >> supports.txt
     return
 }
 
@@ -96,7 +98,6 @@ main() {
     if [[ $OS == 'Linux' ]]; then
         source os/linux.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     fi
-
 }
 
 main $1
