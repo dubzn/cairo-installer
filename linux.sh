@@ -11,6 +11,7 @@ CAIRO_VERSION=$1
 CAIRO_TAR_PATH=$2
 CAIRO_URL=$3
 
+CAIRO_ENV1="$4"
 CAIRO_ENV="export $4"
 CARGO_ENV="export $5"
 
@@ -94,7 +95,7 @@ run_cairo_version() {
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         $HOME/cairo/bin/cairo-compile --version
         tail $HOME/.bashrc
-        echo $CAIRO_ENV
+        export $CAIRO_ENV1
         echo $PATH
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
