@@ -1,4 +1,4 @@
-name: Run latest instalation on Ubuntu
+name: Run installer
 
 on:
   pull_request:
@@ -8,11 +8,27 @@ on:
       - master
 
 jobs:
-  build-20_04:
-    runs-on: ubuntu-20.04    
+  ubuntu:
+    runs-on: ${{ matrix.os }}    
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-20.04, ubuntu-18.04]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Ejecución de script en Bash en Ubuntu 20.04
+    - name: Run installer on Ubuntu
       run: |
+        lsb_release -a
+        chmod +x installer.sh && source installer.sh 
+  macos:
+    runs-on: ${{ matrix.os }}    
+    strategy:
+      matrix:
+        os: [macos-12, macos-11]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run installer on Ubuntu
+      run: |
+        sw_vers
         chmod +x installer.sh && source installer.sh 
