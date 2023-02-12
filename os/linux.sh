@@ -6,7 +6,6 @@ CAIRO_VERSION=$1
 CAIRO_TAR_PATH=$2
 CAIRO_URL=$3
 
-CAIRO_ENV1=$4
 CAIRO_ENV="export $4"
 CARGO_ENV="export $5"
 
@@ -106,6 +105,13 @@ run_cairo_version() {
 }
 
 main() {
+    printf "[main linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
+    printf "[main linux] CAIRO_TAR_PATH=$CAIRO_TAR_PATH ${NC}\\n"
+    printf "[main linux] CAIRO_URL=$CAIRO_URL ${NC}\\n"
+    printf "[main linux] CAIRO_ENV=$CAIRO_ENV ${NC}\\n"
+    printf "[main linux] CARGO_ENV=$CARGO_ENV ${NC}\\n"
+    printf "[main linux] BASH_FILE=$BASH_FILE ${NC}\\n"
+
     install_curl
     install_cargo
     create_cairo_folder

@@ -2,9 +2,6 @@
 
 source variables.sh
 
-
-BASH_FILE=""
-
 set_cairo_version() {
     printf "[set_cairo_version] init\\n"
     # User dont send a version parameter, so take latest supported.
