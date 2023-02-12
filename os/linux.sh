@@ -7,6 +7,7 @@ CAIRO_TAR_PATH=$2
 CAIRO_URL=$3
 
 CAIRO_ENV="export $4"
+CAIRO_ENV_TEMP=$4
 CARGO_ENV="export $5"
 
 BASH_FILE=$6
@@ -96,7 +97,8 @@ run_cairo_version() {
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        export PATH=$CAIRO_ENV:$PATH
+        # Hardcoded for now should be updated with multi-version
+        export "PATH=$CAIRO_ENV_TEMP:\$PATH"
         cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
