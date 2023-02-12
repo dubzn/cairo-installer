@@ -78,16 +78,21 @@ main() {
     ${NC}\\n"
 
     set_cairo_version $1
+    printf "[main] CAIRO_VERSION: $CAIRO_VERSION ${NC}\\n"
+    printf "[main] CAIRO_URL: $CAIRO_URL ${NC}\\n"
+    printf "[main] CAIRO_TAR_PATH: $CAIRO_TAR_PATH ${NC}\\n"
     if grep -q "VERSION_SUPPORTED=0" supports.txt; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
     fi
     
     set_bash_file
+    printf "[main] BASH_FILE: $BASH_FILE ${NC}\\n"
     if grep -q "TERMINAL_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
     fi
     
     set_os
+    printf "[main] OS: $OS ${NC}\\n"
     if grep -q "OS_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
