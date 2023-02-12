@@ -8,7 +8,7 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        CAIRO_PATH="~/cairo/$CAIRO_VERSION/bin"
+        CAIRO_PATH="$HOME/cairo/$CAIRO_VERSION/bin"
         CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
         return 1
     fi
@@ -25,7 +25,7 @@ set_cairo_version() {
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        CAIRO_PATH="~/cairo/$CAIRO_VERSION/bin"
+        CAIRO_PATH="$HOME/cairo/$CAIRO_VERSION/bin"
         CAIRO_ENV="PATH=\"$CAIRO_PATH:\$PATH\""
         return 1
     else

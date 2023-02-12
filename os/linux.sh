@@ -88,6 +88,7 @@ check_envs() {
 clean() {
     printf "${BCyan}[!] Cleaning up..${NC}\\n"
     rm ./temp
+    rm ./supports.txt
     rm $CAIRO_TAR_PATH
 }
 
