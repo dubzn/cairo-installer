@@ -9,6 +9,7 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        CAIRO_ENV="$HOME/cairo/$CAIRO_VERSION/bin:\$PATH"
         echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     fi
@@ -25,6 +26,7 @@ set_cairo_version() {
         CAIRO_VERSION=$1
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
+        CAIRO_ENV="$HOME/cairo/$CAIRO_VERSION/bin:\$PATH"
         echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     else
