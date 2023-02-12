@@ -9,7 +9,7 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        CAIRO_ENV="$HOME/cairo/$CAIRO_VERSION/bin:\$PATH"
+        CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     fi
@@ -80,6 +80,9 @@ main() {
     printf "[main] CAIRO_VERSION: $CAIRO_VERSION ${NC}\\n"
     printf "[main] CAIRO_URL: $CAIRO_URL ${NC}\\n"
     printf "[main] CAIRO_TAR_PATH: $CAIRO_TAR_PATH ${NC}\\n"
+    printf "[main] CAIRO_ENV: $CAIRO_ENV ${NC}\\n"
+    printf "[main] CARGO_ENV: $CARGO_ENV ${NC}\\n"
+
     if grep -q "VERSION_SUPPORTED=0" supports.txt; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
     fi

@@ -96,8 +96,7 @@ run_cairo_version() {
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        # Hardcoded for now should be updated with multi-version
-        export PATH=$HOME/cairo/bin:$PATH
+        export PATH=$CAIRO_ENV:$PATH
         cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
@@ -105,7 +104,6 @@ run_cairo_version() {
 }
 
 main() {
-    printf "[main linux] $1, $2, $3, $4, $5, $6, $7, $8 ... \\n"
     printf "[main linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
     printf "[main linux] CAIRO_TAR_PATH=$CAIRO_TAR_PATH ${NC}\\n"
     printf "[main linux] CAIRO_URL=$CAIRO_URL ${NC}\\n"
