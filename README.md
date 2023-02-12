@@ -51,6 +51,7 @@ git clone https://github.com/sdgalvan/cairo-installer.git
 cd cairo-installer
 ```
 3. Run version-manager.sh with cairo version 
+
 | [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
 | -------------  | ------------- |
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
