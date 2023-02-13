@@ -2,7 +2,7 @@
 
 source variables.sh
 
-DEBUG=1 # change to 1 for extra messages
+DEBUG=0 # change to 1 for extra messages
 
 set_cairo_version() {
     # User dont send a version parameter, so take latest supported.
