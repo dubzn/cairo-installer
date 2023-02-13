@@ -20,9 +20,6 @@ CAIRO_ENV=""
 CARGO_ENV="PATH=\"\$PATH:$HOME/.cargo/bin\""
 CAIRO_FOLDER="$HOME/cairo"
 
-# GitHub Cairo Links
-CAIRO100_ALPHA_2='https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz'
-
 CAIRO_PATH=""
 CAIRO_TAR_PATH=""
 CAIRO_URL=""
