@@ -51,8 +51,8 @@ create_cairo_folder() {
 }
 
 create_version_folder() {
-    if [  ! -d "$CAIRO_FOLDER" ]; then
-        printf "${BPurple}[!] Cairo folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
+    if [  ! -d "$CAIRO_FOLDER/$CAIRO_VERSION" ]; then
+        printf "${BPurple}[!] Cairo version folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
         mkdir "$CAIRO_FOLDER/$CAIRO_VERSION"
     fi
 }
