@@ -12,6 +12,7 @@ BWhite='\033[1;37m'       # White
 NC='\033[0m'              # Text Reset
 
 # Versions
+LATEST_VERSION="1.0.0-alpha-2"
 SUPPORTED_VERSIONS=("1.0.0-alpha-2")
 SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
 
@@ -27,3 +28,15 @@ CAIRO_VERSION=""
 
 BASH_FILE=""
 OS=""
+
+VERSIONS=("1.0.0-alpha-2:https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz")
+set_url_by_version() {
+    for version in "${VERSIONS[@]}"; do
+        KEY=${version%%:*}
+        VALUE=${version#*:}
+    if [ "$1" == "$KEY" ]; then
+        CAIRO_URL=$VALUE
+    fi
+    done
+}
+

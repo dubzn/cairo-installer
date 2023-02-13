@@ -3,14 +3,13 @@
 source variables.sh
 
 DEBUG=1 # change to 1 for extra messages
-LATEST_VERSION="1.0.0-alpha-2"
-CAIRO100_ALPHA_2='https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz'
 
 set_cairo_version() {
+    declare_map
     # User dont send a version parameter, so take latest supported.
     if [ -z "$1" ]; then
         CAIRO_VERSION=$LATEST_VERSION
-        CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]} 
+        set_url_by_version $CAIRO_VERSION
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
@@ -27,7 +26,7 @@ set_cairo_version() {
     done
     if [ "$supported_versions_found" == 1 ]; then
         CAIRO_VERSION=$1
-        CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
+        set_url_by_version $CAIRO_VERSION
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         CAIRO_ENV="$HOME/cairo/$CAIRO_VERSION/bin:\$PATH"
         echo "VERSION_SUPPORTED=1" >> supports.txt
@@ -64,17 +63,6 @@ set_os() {
     return
 }
 
-# Map with relations between version and URL
-declare_map() {
-    if [ "$OS" == "Linux" ]; then
-        declare -A VERSIONS_URL 
-        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
-    elif [ "$OS" == "Mac" ]; then
-        declare -a VERSIONS_URL
-        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
-    fi    
-}
-
 main() {
     printf "${BCyan} 
     ############################################################################
@@ -96,7 +84,6 @@ main() {
          printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
 
-    declare_map
     set_cairo_version $1
     if [ "$DEBUG" -eq 1 ]; then
         printf "[main] CAIRO_VERSION: $CAIRO_VERSION ${NC}\\n"
