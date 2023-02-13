@@ -51,6 +51,7 @@ download_cairo() {
     pwd
     printf "${BCyan}[!] files ${NC}\\n"
     ls
+    printf "${BCyan}[!] moving $HOME/cairo/target/release to $HOME/cairo/$CAIRO_VERSION ${NC}\\n"
     mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION
 }
 
@@ -80,7 +81,7 @@ run_cairo_version() {
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        export PATH=$HOME/cairo/$CAIRO_VERSION/bin:$PATH
+        export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
         cairo-run -p ./src/hello_world.cairo         
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
@@ -91,6 +92,7 @@ main() {
     install_curl
     install_cargo
     download_cairo
+    CAIRO_ENV="export PATH=\"$HOME/cairo/$CAIRO_VERSION:\$PATH\""
     check_envs
     run_cairo_version
 }
