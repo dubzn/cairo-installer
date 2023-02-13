@@ -9,7 +9,7 @@ set_cairo_version() {
     # User dont send a version parameter, so take latest supported.
     if [ -z "$1" ]; then
         CAIRO_VERSION=$LATEST_VERSION
-        CAIRO_URL=${VERSIONS_URL[$LATEST_VERSION]} 
+        CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]} 
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
