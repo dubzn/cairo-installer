@@ -43,18 +43,29 @@ install_cargo() {
     fi    
 }
 
+create_cairo_folder() {
+    if [  ! -d "$CAIRO_FOLDER" ]; then
+        printf "${BPurple}[!] Cairo folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
+        mkdir "$CAIRO_FOLDER"
+    fi
+}
+
+create_version_folder() {
+    if [  ! -d "$CAIRO_FOLDER" ]; then
+        printf "${BPurple}[!] Cairo folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
+        mkdir "$CAIRO_FOLDER/$CAIRO_VERSION"
+    fi
+}
+
 download_cairo() {
     APP_PATH=$(pwd)
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
     cd $HOME
-    git clone $CAIRO_REPOSITORY
+    git clone $CAIRO_REPOSITORY 
     cd cairo
     cargo build --all --release
-    # cd target/release  
-    # pwd
-    # printf "${BCyan}[!] files ${NC}\\n"
-    # ls
-    # printf "${BCyan}[!] moving $HOME/cairo/target/release to $HOME/cairo/$CAIRO_VERSION ${NC}\\n"
+    create_cairo_folder
+    create_version_folder
     mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION/bin
 }
 
