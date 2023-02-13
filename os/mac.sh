@@ -44,11 +44,14 @@ install_cargo() {
 download_cairo() {
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
     cd $HOME
-    git clone https://github.com/starkware-libs/cairo.git
+    git clone $CAIRO_REPOSITORY
     cd cairo
     cargo build --all --release
     cd target/release  
     pwd
+    printf "${BCyan}[!] files ${NC}\\n"
+    ls
+    mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION
 }
 
 check_envs() {
@@ -61,7 +64,7 @@ check_envs() {
         echo $CARGO_ENV >> $BASH_FILE
     fi
 
-    printf "${BCyan}[!] Check Cairo env ($CAIRO_PATH)..${NC}\\n"
+    printf "${BCyan}[!] Check Cairo env..${NC}\\n"
     if grep -q "$CAIRO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CAIRO_ENV is already setted in $BASH_FILE.${NC}\\n"
     else
