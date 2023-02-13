@@ -31,18 +31,3 @@ CAIRO_VERSION=""
 
 BASH_FILE=""
 OS=""
-
-# Map with relations between version and URL
-declare_map() {
-    if [ "$(uname -s)" == "Linux" ]; then
-        declare -A VERSIONS_URL 
-        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
-        printf "[variables] linux ${VERSIONS_URL[$LATEST_VERSION]} ${NC}\\n"
-    elif [ "$(uname -s)" == "Darwin" ]; then
-        declare -a VERSIONS_URL
-        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
-        printf "[variables] macos ${VERSIONS_URL[$LATEST_VERSION]} ${NC}\\n"
-    fi    
-}
-
-declare_map

@@ -3,13 +3,12 @@
 source variables.sh
 
 DEBUG=0 # change to 1 for extra messages
-LATEST_VERSION="1.0.0-alpha-2"
 
 set_cairo_version() {
     # User dont send a version parameter, so take latest supported.
     if [ -z "$1" ]; then
         CAIRO_VERSION=$LATEST_VERSION
-        CAIRO_URL=${VERSIONS_URL[$CAIRO_VERSION]}
+        CAIRO_URL="${VERSIONS_URL[$LATEST_VERSION]}" 
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
         CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
@@ -63,6 +62,17 @@ set_os() {
     return
 }
 
+# Map with relations between version and URL
+declare_map() {
+    if [ "$(uname -s)" == "Linux" ]; then
+        declare -A VERSIONS_URL 
+        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
+    elif [ "$(uname -s)" == "Darwin" ]; then
+        declare -a VERSIONS_URL
+        VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
+    fi    
+}
+
 main() {
     printf "${BCyan} 
     ############################################################################
@@ -76,6 +86,7 @@ main() {
     ############################################################################
     ${NC}\\n"
 
+    declare_map
     set_cairo_version $1
     if [ "$DEBUG" -eq 1 ]; then
         printf "[main] CAIRO_VERSION: $CAIRO_VERSION ${NC}\\n"
