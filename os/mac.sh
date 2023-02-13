@@ -17,7 +17,7 @@ APP_PATH=""
 install_curl() {
     if ! command -v "curl" > /dev/null 2>&1; then
         printf "${BPurple}[!] Curl was not found, installing..${NC}\\n"
-        sudo apt install curl -y
+        brew install curl &> /dev/null
     else
         printf "${BGreen}[OK] Curl was found, skipping install..${NC}\\n"
     fi
