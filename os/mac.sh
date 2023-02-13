@@ -12,6 +12,8 @@ CARGO_ENV="export $5"
 
 BASH_FILE=$6
 
+APP_PATH=""
+
 install_curl() {
     if ! command -v "curl" > /dev/null 2>&1; then
         printf "${BPurple}[!] Curl was not found, installing..${NC}\\n"
@@ -42,17 +44,18 @@ install_cargo() {
 }
 
 download_cairo() {
+    APP_PATH=$(pwd)
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
     cd $HOME
     git clone $CAIRO_REPOSITORY
     cd cairo
     cargo build --all --release
-    cd target/release  
-    pwd
-    printf "${BCyan}[!] files ${NC}\\n"
-    ls
-    printf "${BCyan}[!] moving $HOME/cairo/target/release to $HOME/cairo/$CAIRO_VERSION ${NC}\\n"
-    mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION
+    # cd target/release  
+    # pwd
+    # printf "${BCyan}[!] files ${NC}\\n"
+    # ls
+    # printf "${BCyan}[!] moving $HOME/cairo/target/release to $HOME/cairo/$CAIRO_VERSION ${NC}\\n"
+    mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION/bin
 }
 
 check_envs() {
@@ -82,7 +85,8 @@ run_cairo_version() {
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
         export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
-        cairo-run -p ./src/hello_world.cairo         
+        printf "${BPurple}\\n[!] app path $APP_PATH .. hello world: $APP_PATH/src/hello_world.cairo ${NC}\\n"
+        cairo-run -p $APP_PATH/src/hello_world.cairo               
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
     fi
@@ -92,7 +96,7 @@ main() {
     install_curl
     install_cargo
     download_cairo
-    CAIRO_ENV="export PATH=\"$HOME/cairo/$CAIRO_VERSION:\$PATH\""
+    # CAIRO_ENV="export PATH=\"$HOME/cairo/$CAIRO_VERSION:\$PATH\""
     check_envs
     run_cairo_version
 }
