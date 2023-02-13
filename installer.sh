@@ -66,10 +66,10 @@ set_os() {
 
 # Map with relations between version and URL
 declare_map() {
-    if [ "$(uname -s)" == "Linux" ]; then
+    if [ "$OS" == "Linux" ]; then
         declare -A VERSIONS_URL 
         VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
-    elif [ "$(uname -s)" == "Darwin" ]; then
+    elif [ "$OS" == "Mac" ]; then
         declare -a VERSIONS_URL
         VERSIONS_URL=(["1.0.0-alpha-2"]=$CAIRO100_ALPHA_2)
     fi    
@@ -87,6 +87,14 @@ main() {
     |+                           +                      *        by @dub_zn    |
     ############################################################################
     ${NC}\\n"
+
+    set_os
+    if [ "$DEBUG" -eq 1 ]; then
+        printf "[main] OS: $OS ${NC}\\n"
+    fi
+    if grep -q "OS_SUPPORTED=0" supports.txt; then
+         printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
+    fi
 
     declare_map
     set_cairo_version $1
@@ -107,14 +115,6 @@ main() {
     fi
     if grep -q "TERMINAL_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
-    fi
-    
-    set_os
-    if [ "$DEBUG" -eq 1 ]; then
-        printf "[main] OS: $OS ${NC}\\n"
-    fi
-    if grep -q "OS_SUPPORTED=0" supports.txt; then
-         printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
 
     printf "${BCyan}Installing Cairo ($CAIRO_VERSION) for $OS ${NC}\\n"
