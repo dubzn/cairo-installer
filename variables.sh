@@ -12,7 +12,6 @@ BWhite='\033[1;37m'       # White
 NC='\033[0m'              # Text Reset
 
 # Versions
-LATEST_VERSION="1.0.0-alpha-2"
 SUPPORTED_VERSIONS=("1.0.0-alpha-2")
 SUPPORTED_VERSIONS_STR="[ 1.0.0-alpha-2 ]"
 
