@@ -5,7 +5,6 @@ source variables.sh
 DEBUG=1 # change to 1 for extra messages
 
 set_cairo_version() {
-    declare_map
     # User dont send a version parameter, so take latest supported.
     if [ -z "$1" ]; then
         CAIRO_VERSION=$LATEST_VERSION
