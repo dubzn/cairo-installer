@@ -94,9 +94,8 @@ run_cairo_version() {
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
-        printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
+        printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
         export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
-        printf "${BPurple}\\n[!] app path $APP_PATH .. hello world: $APP_PATH/src/hello_world.cairo ${NC}\\n"
         cairo-run -p $APP_PATH/src/hello_world.cairo               
     else 
         printf "${BRed}[!] Cairo installation failed!${NC}\\n"
