@@ -1,6 +1,18 @@
 #!/bin/sh
 
-source variables.sh
+# CLI Colors
+BBlack='\033[1;30m'       # Black
+BRed='\033[1;31m'         # Red
+BGreen='\033[1;32m'       # Green
+BYellow='\033[1;33m'      # Yellow
+BBlue='\033[1;34m'        # Blue
+BPurple='\033[1;35m'      # Purple
+BCyan='\033[1;36m'        # Cyan
+BWhite='\033[1;37m'       # White
+NC='\033[0m'              # Text Reset
+
+CAIRO_REPOSITORY="https://github.com/starkware-libs/cairo.git"
+CAIRO_FOLDER="$HOME/cairo"
 
 CAIRO_VERSION=$1
 CAIRO_TAR_PATH=$2
@@ -90,7 +102,6 @@ check_envs() {
     fi
 }
 
-
 main() {
     install_curl
     install_cargo
@@ -98,6 +109,8 @@ main() {
     check_envs
     export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
+    clean
+    clean_cairo_path
 }
 
 main
