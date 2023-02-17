@@ -79,7 +79,7 @@ download_cairo() {
     create_cairo_folder
     create_version_folder
     mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION/bin
-    cd APP_PATH
+    cd $APP_PATH
 }
 
 check_envs() {
