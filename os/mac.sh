@@ -58,8 +58,8 @@ create_version_folder() {
 }
 
 download_cairo() {
-    APP_PATH=$(pwd)
     printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
+    APP_PATH=$(pwd)
     cd $HOME
     git clone $CAIRO_REPOSITORY 
     cd cairo
@@ -67,6 +67,7 @@ download_cairo() {
     create_cairo_folder
     create_version_folder
     mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION/bin
+    cd APP_PATH
 }
 
 check_envs() {
@@ -87,28 +88,16 @@ check_envs() {
         echo >> $BASH_FILE
         echo $CAIRO_ENV >> $BASH_FILE
     fi
-    source $BASH_FILE
 }
 
-run_cairo_version() {
-    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
-    if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
-        printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
-        printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
-        export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
-        cairo-run -p $APP_PATH/src/hello_world.cairo               
-    else 
-        printf "${BRed}[!] Cairo installation failed!${NC}\\n"
-    fi
-}
 
 main() {
     install_curl
     install_cargo
     download_cairo
-    # CAIRO_ENV="export PATH=\"$HOME/cairo/$CAIRO_VERSION:\$PATH\""
     check_envs
-    run_cairo_version
+    export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
+    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
 }
 
 main

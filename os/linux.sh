@@ -85,7 +85,6 @@ check_envs() {
         echo >> $BASH_FILE
         echo $CAIRO_ENV >> $BASH_FILE
     fi
-    source $BASH_FILE
 }
 
 clean() {
@@ -93,18 +92,6 @@ clean() {
     rm ./temp
     rm ./supports.txt
     rm $CAIRO_TAR_PATH
-}
-
-run_cairo_version() {
-    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
-    if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
-        printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
-        printf "${BPurple}\\n[!] Trying to run Hello World..${NC}\\n"
-        export PATH=$HOME/cairo/$CAIRO_VERSION/bin:$PATH
-        cairo-run -p ./src/hello_world.cairo         
-    else 
-        printf "${BRed}[!] Cairo installation failed!${NC}\\n"
-    fi
 }
 
 main() {
@@ -122,7 +109,7 @@ main() {
     download_cairo
     check_envs
     clean
-    run_cairo_version
+    export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
 }
 
 main
