@@ -102,6 +102,16 @@ check_envs() {
     fi
 }
 
+clean() {
+    printf "${BCyan}[!] Cleaning up..${NC}\\n"
+    rm ./temp 2> /dev/null || true
+    rm ./supports.txt 2> /dev/null || true
+}
+
+clean_cairo_path() {
+    rm $CAIRO_TAR_PATH 2> /dev/null || true
+}
+
 main() {
     install_curl
     install_cargo

@@ -99,7 +99,6 @@ check_envs() {
     fi
 }
 
-
 clean() {
     printf "${BCyan}[!] Cleaning up..${NC}\\n"
     rm ./temp 2> /dev/null || true
