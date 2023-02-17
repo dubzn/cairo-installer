@@ -19,10 +19,10 @@ jobs:
     - name: Run installer on Ubuntu
       run: |
         lsb_release -a
-        chmod +x ./installer.sh && ./installer.sh
+        chmod +x installer.sh && installer.sh
         source $HOME/.bashrc
         source $HOME/.zshrc
-        chmod +x ./run-cairo.sh && ./run-cairo.sh
+        chmod +x run-cairo.sh && run-cairo.sh
   macos:
     runs-on: ${{ matrix.os }}    
     strategy:
@@ -34,7 +34,7 @@ jobs:
     - name: Run installer on Ubuntu
       run: |
         sw_vers
-        chmod +x ./installer.sh && ./installer.sh
+        chmod +x installer.sh && installer.sh
         source $HOME/.bashrc
         source $HOME/.zshrc
-        chmod +x ./run-cairo.sh && ./run-cairo.sh
+        chmod +x run-cairo.sh && run-cairo.sh
