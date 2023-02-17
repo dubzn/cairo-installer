@@ -1,6 +1,6 @@
 #!/bin/sh
 
-run_cairo_version() {
+run_cairo() {
     if ! command "--version" "cairo-compile" > /dev/null 2>&1; then
         printf "${BGreen}[!] Cairo installation was successful! (v$CAIRO_VERSION)${NC}\\n"
         printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
@@ -10,4 +10,4 @@ run_cairo_version() {
     fi
 }
 
-run_cairo_version
+run_cairo
