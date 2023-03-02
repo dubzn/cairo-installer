@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# DEBUGGER
+DEBUG=1 # change to 1 for extra messages
+
 # VARIABLES
 
 # CLI Colors
@@ -54,9 +57,6 @@ clean() {
 clean_cairo_path() {
     rm $CAIRO_TAR_PATH 2> /dev/null || true
 }
-
-# DEBUGGER
-DEBUG=1 # change to 1 for extra messages
 
 # FUNCTIONS
 set_cairo_version() {
