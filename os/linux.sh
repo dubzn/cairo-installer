@@ -56,7 +56,7 @@ install_cargo() {
 }
 
 create_cairo_folder() {
-    if [  ! -d "$CAIRO_FOLDER" ]; then
+    if [ ! -d "$CAIRO_FOLDER" ]; then
         printf "${BPurple}[!] Cairo folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
         mkdir "$CAIRO_FOLDER"
     fi
@@ -80,6 +80,11 @@ download_cairo() {
 }
 
 check_envs() {
+    set_cargo_env
+    set_cairo_env
+}
+
+set_cargo_env() {
     printf "${BCyan}[!] Check Cargo env..${NC}\\n"
     if grep -q "$CARGO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CARGO_ENV is already setted in $BASH_FILE.${NC}\\n"
@@ -88,7 +93,9 @@ check_envs() {
         echo >> $BASH_FILE
         echo $CARGO_ENV >> $BASH_FILE
     fi
+}
 
+set_cairo_env() {
     printf "${BCyan}[!] Check Cairo env..${NC}\\n"
     if grep -q "$CAIRO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CAIRO_ENV is already setted in $BASH_FILE.${NC}\\n"
@@ -109,6 +116,37 @@ clean_cairo_path() {
     rm $CAIRO_TAR_PATH 2> /dev/null || true
 }
 
+create_folder() {
+    if [  ! -d "$CAIRO_FOLDER/$1" ]; then
+        printf "${BPurple}[!] Cairo version folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
+        mkdir "$CAIRO_FOLDER/$1"
+    fi
+}
+
+install_latest() {
+    printf "${BCyan}[!] Clonning Cairo (starkware-libs/cairo branch main)..${NC}\\n"
+    # Save the path to later be able to execute hello world
+    APP_PATH=$(pwd)
+    
+    # Clone from the main branch the last changes of cairo repository
+    clone_cairo
+
+    # Generate the release with the cargo command
+    cargo build --all --release
+
+    # Override latest folder
+    rm $CAIRO_FOLDER/latest 2> /dev/null || true
+    mv $CAIRO_FOLDER/cairo $CAIRO_FOLDER/latest
+
+    cd $APP_PATH
+}
+
+clone_cairo() {
+    cd $CAIRO_FOLDER
+    git clone $CAIRO_REPOSITORY 
+    cd cairo
+}
+
 main() {
     if [ "$DEBUG" -eq 1 ]; then
         printf "[linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
@@ -118,12 +156,22 @@ main() {
         printf "[linux] CARGO_ENV=$CARGO_ENV ${NC}\\n"
         printf "[linux] BASH_FILE=$BASH_FILE ${NC}\\n"
     fi
+    
     install_curl
     install_cargo
     create_cairo_folder
-    download_cairo
+
+    if [ "$CAIRO_ENV"=*"latest"* ]; then
+        printf "[linux] Installing latest${NC}\\n"
+        install_latest
+        export PATH=$HOME/cairo/latest/target/release:$PATH
+    else 
+        printf "[linux] Installing specific version${NC}\\n"
+        download_cairo
+        export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
+    fi
     check_envs
-    export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
+    
     clean
     clean_cairo_path
 }

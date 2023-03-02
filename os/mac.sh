@@ -62,27 +62,36 @@ create_cairo_folder() {
     fi
 }
 
-create_version_folder() {
-    if [  ! -d "$CAIRO_FOLDER/$CAIRO_VERSION" ]; then
-        printf "${BPurple}[!] Cairo version folder does not exist, creating in $CAIRO_FOLDER ${NC}\\n"
-        mkdir "$CAIRO_FOLDER/$CAIRO_VERSION"
-    fi
-}
-
-download_cairo() {
-    printf "${BCyan}[!] Downloading Cairo ($CAIRO_VERSION) from GitHub..${NC}\\n"
+install_latest() {
+    printf "${BCyan}[!] Clonning Cairo (starkware-libs/cairo branch main)..${NC}\\n"
+    # Save the path to later be able to execute hello world
     APP_PATH=$(pwd)
-    cd $HOME
-    git clone $CAIRO_REPOSITORY 
-    cd cairo
+    
+    # Clone from the main branch the last changes of cairo repository
+    clone_cairo
+
+    # Generate the release with the cargo command
     cargo build --all --release
-    create_cairo_folder
-    create_version_folder
-    mv $HOME/cairo/target/release $HOME/cairo/$CAIRO_VERSION/bin
+
+    # Override latest folder
+    rm $CAIRO_FOLDER/latest 2> /dev/null || true
+    mv $CAIRO_FOLDER/cairo $CAIRO_FOLDER/latest
+
     cd $APP_PATH
 }
 
+clone_cairo() {
+    cd $CAIRO_FOLDER
+    git clone $CAIRO_REPOSITORY 
+    cd cairo
+}
+
 check_envs() {
+    set_cargo_env
+    set_cairo_env
+}
+
+set_cargo_env() {
     printf "${BCyan}[!] Check Cargo env..${NC}\\n"
     if grep -q "$CARGO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CARGO_ENV is already setted in $BASH_FILE.${NC}\\n"
@@ -91,7 +100,9 @@ check_envs() {
         echo >> $BASH_FILE
         echo $CARGO_ENV >> $BASH_FILE
     fi
+}
 
+set_cairo_env() {
     printf "${BCyan}[!] Check Cairo env..${NC}\\n"
     if grep -q "$CAIRO_ENV" "$BASH_FILE"; then
         printf "${BGreen}[!] $CAIRO_ENV is already setted in $BASH_FILE.${NC}\\n"
@@ -115,9 +126,11 @@ clean_cairo_path() {
 main() {
     install_curl
     install_cargo
-    download_cairo
+    create_cairo_folder
+
+    install_latest
     check_envs
-    export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
+   
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     clean
     clean_cairo_path

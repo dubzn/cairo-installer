@@ -45,7 +45,7 @@ set_url_by_version() {
 }
 
 # UTILS
-    clean() {
+clean() {
     printf "${BCyan}[!] Cleaning up..${NC}\\n"
     rm ./temp 2> /dev/null || true
     rm ./supports.txt 2> /dev/null || true
@@ -65,7 +65,7 @@ set_cairo_version() {
         CAIRO_VERSION=$LATEST_VERSION
         set_url_by_version $CAIRO_VERSION
         CAIRO_TAR_PATH="$HOME/$CAIRO_VERSION.tar.gz"
-        CAIRO_ENV="PATH=\"$HOME/cairo/$CAIRO_VERSION/bin:\$PATH\""
+        CAIRO_ENV="PATH=\"$HOME/cairo/latest/target/release:\$PATH\""
         echo "VERSION_SUPPORTED=1" >> supports.txt
         return 
     fi
@@ -157,7 +157,6 @@ main() {
          printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
     fi
 
-    printf "${BCyan}Installing Cairo ($CAIRO_VERSION) for $OS ${NC}\\n"
     if [ "$OS" = "Darwin" ]; then
         ./os/mac.sh $CAIRO_VERSION $CAIRO_TAR_PATH $CAIRO_URL $CAIRO_ENV $CARGO_ENV $BASH_FILE
     elif [ "$OS" = "Linux" ]; then
