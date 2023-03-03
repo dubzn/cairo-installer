@@ -37,6 +37,7 @@ BASH_FILE=""
 OS=""
 
 VERSIONS="1.0.0-alpha-2:https://github.com/starkware-libs/cairo/releases/download/v1.0.0-alpha.2/cairo-lang-1.0.0-alpha.2-x86_64-unknown-linux-musl.tar.gz"
+
 set_url_by_version() {
     for version in "$VERSIONS"; do
         KEY=${version%%:*}
