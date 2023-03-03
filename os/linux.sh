@@ -165,6 +165,7 @@ main() {
         printf "[linux] Installing latest${NC}\\n"
         install_latest
         export PATH=$HOME/cairo/latest/target/release:$PATH
+        printf "[linux] PATH $PATH ${NC}\\n"
     else 
         printf "[linux] Installing specific version${NC}\\n"
         download_cairo

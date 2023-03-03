@@ -130,7 +130,10 @@ main() {
 
     install_latest
     check_envs
-   
+    
+    export PATH=$HOME/cairo/latest/target/release:$PATH
+    printf "[linux] PATH $PATH ${NC}\\n"
+
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     clean
     clean_cairo_path
