@@ -20,8 +20,8 @@ jobs:
       run: |
         lsb_release -a
         chmod +x ./installer.sh && ./installer.sh
-        source $HOME/.bashrc
-        source $HOME/.zshrc
+        source $HOME/.bashrc 2> /dev/null || true
+        source $HOME/.zshrc 2> /dev/null || true
         chmod +x ./run-cairo.sh && ./run-cairo.sh
   macos:
     runs-on: ${{ matrix.os }}    
@@ -35,6 +35,6 @@ jobs:
       run: |
         sw_vers
         chmod +x ./installer.sh && ./installer.sh
-        source $HOME/.bashrc
-        source $HOME/.zshrc
+        source $HOME/.bashrc 2> /dev/null || true
+        source $HOME/.zshrc 2> /dev/null || true
         chmod +x ./run-cairo.sh && ./run-cairo.sh
