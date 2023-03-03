@@ -19,7 +19,11 @@ jobs:
     - name: Run installer on Ubuntu
       run: |
         lsb_release -a
-        chmod +x installer.sh && source installer.sh 
+        chmod +x ./installer.sh && ./installer.sh
+        source $HOME/.bashrc
+        source $HOME/.zshrc
+    - name: Run Cairo 1 Hello World
+        chmod +x ./run-cairo.sh && ./run-cairo.sh
   macos:
     runs-on: ${{ matrix.os }}    
     strategy:
@@ -28,7 +32,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Run installer on Ubuntu
+    - name: Run installer on MacOS
       run: |
         sw_vers
-        chmod +x installer.sh && source installer.sh 
+        chmod +x ./installer.sh && ./installer.sh
+        source $HOME/.bashrc
+        source $HOME/.zshrc
+    - name: Run Cairo 1 Hello World
+        chmod +x ./run-cairo.sh && ./run-cairo.sh
