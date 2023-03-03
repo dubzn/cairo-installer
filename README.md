@@ -25,10 +25,12 @@ cd cairo-installer
 ```
 3. Run installer.sh with cairo version 
 
-3.a Install the latest version by simply running
+3.a Install the latest version (branch main from [starkware/cairo](https://github.com/starkware-libs/cairo/)) by simply running
 ```
-source installer.sh
+chmod +x ./installer.sh
+./installer.sh
 ```
+
 
 3.b Optionally, you can choose one of the available versions in the following table:
 | [Cairo Releases](https://github.com/starkware-libs/cairo/releases/)  | Parameter |
@@ -36,12 +38,13 @@ source installer.sh
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
 
 ```
-source installer.sh 1.0.0-alpha-2
+chmod +x ./installer.sh
+./installer.sh 1.0.0-alpha-2
 ```
 4. If everything went well, you should see something like this:
 ![image](https://user-images.githubusercontent.com/58611754/217097377-8883dc47-bc4a-431b-b821-b952cfcd8e8d.png)
 
-### Change version
+### Change version (WIP)
 1. Clone the repo
 ```
 git clone https://github.com/sdgalvan/cairo-installer.git
@@ -57,7 +60,7 @@ cd cairo-installer
 | [v1.0.0-alpha-2](https://github.com/starkware-libs/cairo/releases/tag/v1.0.0-alpha.2)   | 1.0.0-alpha-2 |
 
 ```
-source version-manager.sh 1.0.0-alpha-2
+./version-manager.sh 1.0.0-alpha-2
 ```
 4. If everything went well, you should see something like this:
 ![image](https://user-images.githubusercontent.com/58611754/218343764-ddf408be-0235-400a-b854-7a79e7082c7f.png)
