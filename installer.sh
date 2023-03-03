@@ -134,6 +134,7 @@ main() {
     if [ "$DEBUG" -eq 1 ]; then
         printf "[main] OS: $OS ${NC}\\n"
     fi
+    
     if grep -q "OS_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The OS is not supported $OS.\\n${NC}"
     fi
@@ -146,6 +147,7 @@ main() {
         printf "[main] CAIRO_ENV: $CAIRO_ENV ${NC}\\n"
         printf "[main] CARGO_ENV: $CARGO_ENV ${NC}\\n"
     fi
+    
     if grep -q "VERSION_SUPPORTED=0" supports.txt; then
         printf "${BRed}[!] Cannot set the URL for download Cairo, are you trying to install one of this versions? ${BWhite}$SUPPORTED_VERSIONS_STR ${NC}\\n"
     fi
@@ -154,6 +156,7 @@ main() {
     if [ "$DEBUG" -eq 1 ]; then
         printf "[main] BASH_FILE: $BASH_FILE ${NC}\\n"
     fi
+    
     if grep -q "TERMINAL_SUPPORTED=0" supports.txt; then
          printf "${BRed}[!] The terminals supported by the script are: bash and zsh.\\n${NC}"
     fi
