@@ -174,6 +174,12 @@ main() {
         printf "[linux] /latest ///////////////////// ${NC}\\n"
         ls $HOME/cairo/latest
 
+        printf "[linux] /latest ///////////////////// ${NC}\\n"
+        ls $HOME/cairo/latest/target
+
+        printf "[linux] /latest ///////////////////// ${NC}\\n"
+        ls $HOME/cairo/latest/target/release
+
     else 
         printf "[linux] Installing specific version${NC}\\n"
         download_cairo
