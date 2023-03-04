@@ -185,7 +185,7 @@ main() {
         printf "[linux] Installing specific version${NC}\\n"
         download_cairo
         export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
-        export $BASH_FILE
+        export BASH_FILE=$BASH_FILE
     fi
     check_envs
     

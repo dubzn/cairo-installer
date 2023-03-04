@@ -132,7 +132,7 @@ main() {
     check_envs
 
     export PATH=$HOME/cairo/latest/target/release:$PATH
-    export $BASH_FILE
+    export BASH_FILE=$BASH_FILE
     printf "[mac] PATH $PATH ${NC}\\n"
  
     printf "[mac] /cairo ///////////////////// ${NC}\\n"
