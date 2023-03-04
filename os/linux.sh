@@ -187,6 +187,7 @@ main() {
     fi
     check_envs
     
+    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     clean
     clean_cairo_path
 }
