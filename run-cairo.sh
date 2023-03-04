@@ -8,6 +8,9 @@ NC='\033[0m'              # Text Reset
 run_cairo() {
     if ! command "-h" "cairo-compile" > /dev/null 2>&1; then
         printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
+        echo $BASH_FILE
+        source $BASH_FILE 2> /dev/null || true
+        cairo-compile --version
         cairo-run -p ./src/hello_world.cairo               
     else 
         printf "${BPurple}[!] You may need to run 'source $BASH_FILE' (or restart console) for the changes to take effect${NC}\\n"
