@@ -174,10 +174,10 @@ main() {
         printf "[linux] /latest ///////////////////// ${NC}\\n"
         ls $HOME/cairo/latest
 
-        printf "[linux] /latest ///////////////////// ${NC}\\n"
+        printf "[linux] /target ///////////////////// ${NC}\\n"
         ls $HOME/cairo/latest/target
 
-        printf "[linux] /latest ///////////////////// ${NC}\\n"
+        printf "[linux] /release ///////////////////// ${NC}\\n"
         ls $HOME/cairo/latest/target/release
 
     else 
