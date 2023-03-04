@@ -22,7 +22,7 @@ jobs:
         chmod +x ./installer.sh && ./installer.sh
         source $HOME/.bashrc 2> /dev/null || true
         source $HOME/.zshrc 2> /dev/null || true
-        chmod +x ./run-cairo.sh && ./run-cairo.sh
+        chmod +x ./run-cairo.sh && source run-cairo.sh
   macos:
     runs-on: ${{ matrix.os }}    
     strategy:
@@ -37,4 +37,4 @@ jobs:
         chmod +x ./installer.sh && ./installer.sh
         source $HOME/.bashrc 2> /dev/null || true
         source $HOME/.zshrc 2> /dev/null || true
-        chmod +x ./run-cairo.sh && ./run-cairo.sh
+        chmod +x ./run-cairo.sh && source run-cairo.sh
