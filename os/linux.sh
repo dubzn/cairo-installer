@@ -168,17 +168,7 @@ main() {
         export $BASH_FILE
         
         printf "[linux] PATH $PATH ${NC}\\n"
-
-        printf "[linux] /cairo ///////////////////// ${NC}\\n"
-        ls $HOME/cairo
- 
-        printf "[linux] /latest ///////////////////// ${NC}\\n"
-        ls $HOME/cairo/latest
-
-        printf "[linux] /target ///////////////////// ${NC}\\n"
-        ls $HOME/cairo/latest/target
-
-        printf "[linux] /release ///////////////////// ${NC}\\n"
+        printf "[linux] $HOME/cairo/latest/target/release ///////////////////// ${NC}\\n"
         ls $HOME/cairo/latest/target/release
 
     else 

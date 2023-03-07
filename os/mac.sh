@@ -133,13 +133,10 @@ main() {
 
     export PATH=$HOME/cairo/latest/target/release:$PATH
     export BASH_FILE=$BASH_FILE
-    printf "[mac] PATH $PATH ${NC}\\n"
- 
-    printf "[mac] /cairo ///////////////////// ${NC}\\n"
-    ls $HOME/cairo
- 
-    printf "[mac] /latest ///////////////////// ${NC}\\n"
-    ls $HOME/cairo/latest
+    
+    printf "[linux] PATH $PATH ${NC}\\n"
+    printf "[linux] $HOME/cairo/latest/target/release ///////////////////// ${NC}\\n"
+    ls $HOME/cairo/latest/target/release
     
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     clean
