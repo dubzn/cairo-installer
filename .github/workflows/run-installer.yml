@@ -20,10 +20,6 @@ jobs:
       run: |
         lsb_release -a
         chmod +x ./installer.sh && ./installer.sh
-        source $HOME/.bashrc 2> /dev/null || true
-        source $HOME/.zshrc 2> /dev/null || true
-        echo "PATH: $CAIRO_PATH"
-        chmod +x ./run-cairo.sh && ./run-cairo.sh $CAIRO_PATH
   macos:
     runs-on: ${{ matrix.os }}    
     strategy:
@@ -36,7 +32,3 @@ jobs:
       run: |
         sw_vers
         chmod +x ./installer.sh && ./installer.sh
-        source $HOME/.bashrc 2> /dev/null || true
-        source $HOME/.zshrc 2> /dev/null || true
-        echo "PATH: $CAIRO_PATH"
-        chmod +x ./run-cairo.sh && ./run-cairo.sh $CAIRO_PATH

@@ -123,6 +123,17 @@ clean_cairo_path() {
     rm $CAIRO_TAR_PATH 2> /dev/null || true
 }
 
+run_cairo() {
+    printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
+    if [ ! -z "$1" ]; then
+        $1/cairo-compile --version
+        $1/cairo-run -p ./src/hello_world.cairo               
+    else 
+        cairo-compile --version
+        cairo-run -p ./src/hello_world.cairo               
+    fi
+}
+
 main() {
     install_curl
     install_cargo
@@ -132,13 +143,11 @@ main() {
     check_envs
 
     export PATH=$HOME/cairo/latest/target/release:$PATH
-    export CAIRO_PATH=$HOME/cairo/latest/target/release
-    
-    printf "[linux] PATH $PATH ${NC}\\n"
-    printf "[linux] $HOME/cairo/latest/target/release ///////////////////// ${NC}\\n"
-    ls $HOME/cairo/latest/target/release
+    CAIRO_PATH=$HOME/cairo/latest/target/release
     
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
+    run_cairo $CAIRO_PATH
+    
     clean
     clean_cairo_path
 }

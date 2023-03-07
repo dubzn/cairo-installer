@@ -147,6 +147,17 @@ clone_cairo() {
     cd cairo
 }
 
+run_cairo() {
+    printf "${BPurple}[!] Trying to run Hello World..${NC}\\n"
+    if [ ! -z "$1" ]; then
+        $1/cairo-compile --version
+        $1/cairo-run -p ./src/hello_world.cairo               
+    else 
+        cairo-compile --version
+        cairo-run -p ./src/hello_world.cairo               
+    fi
+}
+
 main() {
     if [ "$DEBUG" -eq 1 ]; then
         printf "[linux] CAIRO_VERSION=$CAIRO_VERSION ${NC}\\n"
@@ -165,15 +176,18 @@ main() {
         printf "[linux] Installing latest${NC}\\n"
         install_latest
         export PATH=$HOME/cairo/latest/target/release:$PATH
-        export CAIRO_PATH=$HOME/cairo/latest/target/release
+        CAIRO_PATH=$HOME/cairo/latest/target/release
     else 
         printf "[linux] Installing specific version${NC}\\n"
         download_cairo
         export PATH=$HOME/cairo/$CAIRO_VERSION:$PATH
-        export CAIRO_PATH=$HOME/cairo/$CAIRO_VERSION
+        CAIRO_PATH=$HOME/cairo/$CAIRO_VERSION
     fi
     check_envs
     
+    printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
+    run_cairo $CAIRO_PATH
+
     printf "${BPurple}[!] You may need to run 'source $BASH_FILE' for the changes to take effect${NC}\\n"
     clean
     clean_cairo_path
