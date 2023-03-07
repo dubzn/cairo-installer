@@ -9,11 +9,10 @@ run_cairo() {
     if [ ! -z "$1" ]; then
         $1/cairo-compile --version
         $1/cairo-run -p ./src/hello_world.cairo               
-        return 
-    else ! command "-h" "cairo-compile" > /dev/null 2>&1; then
+    else ! command "-h" "cairo-compile" > /dev/null 2>&1;
         cairo-compile --version
         cairo-run -p ./src/hello_world.cairo               
-   fi
+    fi
 }
 
 run_cairo $1
