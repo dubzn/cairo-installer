@@ -10,7 +10,7 @@ run_cairo() {
         $1/cairo-run -p ./src/hello_world.cairo               
     else 
         cairo-compile --version
-        cairo-run -p ./src/hello_world.cairo               
+        cairo-run ./src/hello_world.cairo               
     fi
 }
 
