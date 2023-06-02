@@ -1,4 +1,5 @@
-fn main() -> felt {
-    debug::print_felt('Hello World in Cairo 1.0 :))');
-    1
+use debug::PrintTrait;
+
+fn main() {
+    'Hello World in Cairo 1.0 :))'.print()
 }
