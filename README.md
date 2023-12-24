@@ -1,5 +1,5 @@
 
-# Cairo 1.0 Installer
+# Cairo 1.0 Installer (DEPRECATED)
 This project **(no official)** install a versión of **Cairo 1.0** (the versions are specified below).
 
 <div align="center">
